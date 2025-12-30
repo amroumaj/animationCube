@@ -11,10 +11,25 @@ let clear = () => {
   ctx.fillRect(0, 0, animations.width, animations.height)
 }
 
-let point = (x, y) => {
-  ctx.fillRect(0, 0, 100, 100);
+let point = ({x, y}) => {
+  let s = 10;
   ctx.fillStyle = fg;
+  ctx.fillRect(x - s/2, y - s/2, s, s);
+}
+
+let screen = (p) => {
+  return {
+    x: (p.x + 1)/2 * animations.width,
+    y: (1 - (p.y + 1)/2) * animations.height,
+  }
+}
+
+let projection = ({x, y, z}) => {
+  return {
+    x: x/z,
+    y: y/z
+  }
 }
 
 clear();
-point(100, 100)
+point(screen({x: 0, y: 0}))
